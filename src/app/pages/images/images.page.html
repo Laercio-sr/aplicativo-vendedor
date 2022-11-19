@@ -1,0 +1,53 @@
+<ion-header>
+  <app-toolbar [title]="'Carregar Imagens'"></app-toolbar>
+  
+</ion-header>
+
+<ion-content>
+  <ion-item class="sticky-top">    
+    <ion-searchbar placeholder="Pesquisar imagem..." (ionInput)="imageFilter($event)" clearInput>
+    </ion-searchbar>
+  </ion-item>
+  <ion-list>
+    <ion-item *ngFor="let item of items | async">
+      <ion-thumbnail slot="start" *ngIf="item.imageUrl">
+        <img [src]="item.imageUrl" alt="">
+      </ion-thumbnail>
+      <ion-label>{{ item.title }}</ion-label><br>
+      <input type="text" value="{{ item.imageUrl }}" #userinput>
+      <ion-button (click)="copyInputMessage(userinput)" value="click to copy" ><ion-icon name="copy-outline"></ion-icon></ion-button>
+      <ion-button slot="end" fill="clear" color="danger" (click)="delete(item)">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Carregar Nova Imagem</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <form #f="ngForm" autocomplete="off" (ngSubmit)="addImg(f)">
+        <div class="form-group">
+          <ion-item>
+            <ion-label position="stacked">Nome da Imagem</ion-label>
+            <ion-input [clearInput]="true" autocomplete="false" type="text" name="title" [(ngModel)]="nameImg" placeholder="Digite o nome" required></ion-input>
+          </ion-item>
+          <ion-item lines="none">
+            <input autocomplete="false" class="form-control" type="file" name="inputFile" [(ngModel)]="imageUrl" (change)="chooseFile($event)" required>
+          </ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col>            
+              </ion-col>      
+                <ion-button type="submit" class="btn btn-success" [disabled]="!f.valid">Adicionar</ion-button>
+              <ion-col>            
+              </ion-col>
+            </ion-row>        
+          </ion-grid>
+        </div>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+

@@ -1,0 +1,32 @@
+ion-menu{
+    .profile{
+        font-size: 20px;
+        color: rgb(255, 255, 255);
+    }
+
+    ion-content{
+        --ion-background-color:var(--ion-color-primary);
+    }
+
+    ion-item,ion-icon{
+        color: rgb(255, 255, 255);
+    }
+
+    .cat-list{
+        --ion-background-color: var(--ion-color-primary);
+        border-width: 2px 0 0 0;
+        border-style: solid;
+        border-color: #188bc0;
+    }
+
+    .active-cat{
+        color: #ffffff;
+        --ion-background-color:var(--ion-color-light);
+    }
+    
+    .log-out{
+        position: relative;
+        bottom: 0px;
+        --ion-background-color: #0059a1;
+    }
+}

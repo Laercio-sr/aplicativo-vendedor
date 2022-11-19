@@ -1,0 +1,69 @@
+<ion-header>
+  <app-toolbar [title]="'Products'"></app-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-lg="6">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Informações do Produto</ion-card-title>
+          </ion-card-header>
+          <form #f="ngForm" autocomplete="off" (ngSubmit)="register(f.value)">
+            <div class="form-group">
+              <ion-item>
+                <ion-label position="floating">Produto<ion-text color="danger">*</ion-text></ion-label>
+                <ion-input autocomplete="false" class="form-control" type="text" [(ngModel)]="product.title" name="title" #title="ngModel" required></ion-input>
+              </ion-item>
+              <ion-text color="danger" *ngIf="title.touched && title.invalid">Digite o nome do Produto</ion-text>
+              <ion-item>
+                <ion-label position="floating">Descrição</ion-label>
+                <ion-input type="text" [(ngModel)]="product.description" name="description" #description="ngModel"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Valor <ion-text color="danger">*</ion-text></ion-label>
+                <ion-input autocomplete="false" class="form-control" type="number" [(ngModel)]="product.price" name="price" #price="ngModel" required [min]="0"></ion-input>
+              </ion-item>
+              <ion-text color="danger" *ngIf="price.touched && price.invalid">
+                  <ion-text color="danger" *ngIf="price?.errors.required">Digite uma valor</ion-text>
+                  <ion-text color="danger" *ngIf="price?.errors.min">Digite um valor minimo</ion-text>
+              </ion-text>
+              <ion-item>
+                <ion-label>Categoria<ion-text color="danger">*</ion-text></ion-label>
+                <ion-select autocomplete="false" class="form-control" [(ngModel)]="product.cat" name="cat" #cat="ngModel" required>
+                  <ion-select-option *ngFor="let cat of categoriesObs | async" [value]="cat.key" >{{cat.name}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-text color="danger" *ngIf="cat.touched && cat.invalid">Selecione uma categoria</ion-text>
+              <ion-item>
+                <ion-label position="floating">Quantidade<ion-text color="danger">*</ion-text></ion-label>
+                <ion-input autocomplete="false" class="form-control" type="number" [(ngModel)]="product.quantity" name="quantity"  #quantity="ngModel" required></ion-input>
+              </ion-item>
+              <ion-text color="danger" *ngIf="quantity.touched && quantity.invalid">Digite no minimo 1</ion-text>
+              <ion-item>
+                <ion-label position="floating">Url da imagem <ion-text color="danger">*</ion-text></ion-label>
+                <ion-input autocomplete="false" class="form-control" type="text" [(ngModel)]="product.imgUrl" name="imgUrl" #imgUrl="ngModel" required></ion-input>
+              </ion-item>
+              <ion-text color="danger" *ngIf="imgUrl.touched && imgUrl.invalid">Necessário Url da imagem</ion-text>
+            
+              <ion-button expand="block" color="primary" type="submit" class="btn btn-success" [disabled]="!f.valid"> Adicionar </ion-button>
+              <ion-button expand="block" color="danger" type="button" (click)="delete() " *ngIf="id">Excluir</ion-button>
+            </div>
+          </form>
+        </ion-card>
+      </ion-col>
+      <ion-col size="12" size-lg="6" >
+        <ion-card>
+          <ion-card-content>                 
+            <ion-img [src]="product.imgUrl" *ngIf="product.imgUrl"></ion-img>
+          </ion-card-content>
+          <ion-card-header>
+            <ion-card-title>{{ product.title }}</ion-card-title>
+            <ion-card-subtitle>{{ product.price | currency:'BRL':true }}</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

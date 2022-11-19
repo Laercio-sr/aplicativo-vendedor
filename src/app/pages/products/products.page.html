@@ -1,0 +1,31 @@
+<ion-header>
+  <app-toolbar [title]="'Produtos Cadastrados '"></app-toolbar>
+ </ion-header>
+
+<ion-content>
+  <ion-searchbar #value (ionInput)="applyFilter(value.value)" placeholder="procurar...">
+  </ion-searchbar>
+  <ion-list>
+    <ion-item class="dataRow">
+      <ion-label><p style="color: #0000FF;">Nome</p></ion-label>
+      <ion-label><p style="color: #0000FF;">Valor</p></ion-label>
+      <ion-button color="light">Opção</ion-button>
+    </ion-item>
+    <ion-item *ngFor="let product of filteredProducts" class="dataRow">
+      <ion-label><p>{{ product.title }}</p></ion-label>
+      <ion-label><p>{{ product.price | currency:'BRL':true }}</p></ion-label>
+      <ion-button color="tertiary" [routerLink]="['/products',product.key]">Editar</ion-button>
+    </ion-item>
+  </ion-list>
+  <ion-grid>
+    <ion-row>
+      <ion-col>            
+      </ion-col>      
+        <ion-button routerLink="/products/new">Adicionar Produto
+          <ion-icon name="add"></ion-icon>
+        </ion-button>
+      <ion-col>            
+      </ion-col>
+    </ion-row>        
+  </ion-grid>  
+</ion-content>

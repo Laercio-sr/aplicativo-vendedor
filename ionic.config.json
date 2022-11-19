@@ -1,7 +1,8 @@
 {
-  "name": "pi-semestre6",
+  "name": "loja-vendedor2",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button class="backbtn" routerLink="/login" routerDirection="back">
+        <ion-icon style="font-size: 30px;" name="arrow-back-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" *ngIf="user$ | async as user">
+  <h1>Validar cadastro</h1>
+  <ion-row>
+    <ion-col>
+      <h2 class="ion-text-center">Obrigado por se cadastrar!</h2>
+      <p>Um link de confirmação foi enviado para o <br>email: <strong style="color: rgb(10, 6, 250);">{{user.email}}</strong></p>
+      <p>Verifique seu e-mail e clique no link para validar seu cadastro.</p>
+    </ion-col>
+  </ion-row> 
+  <div class="ion-padding container">
+    <p>O email não chegou?</p>    
+    <div class="form-container">
+      <ion-button expand="block" class="main-button" (click)="sendEmail()">Reenviaer email</ion-button>
+    </div>
+  </div>
+</ion-content>
